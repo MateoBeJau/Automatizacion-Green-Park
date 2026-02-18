@@ -2,6 +2,7 @@ import { z } from "zod";
 
 export const RowGastosSchema = z.object({
   edificio: z.string().optional(),
+  nombreEdificio: z.string().optional(),
   fecha: z.string().optional(),
   observaciones: z.string().max(20).optional(),
   rubro: z.number().int().positive(),
@@ -16,13 +17,14 @@ export const RowGastosSchema = z.object({
   empresa: z.string().optional(),
   unidad: z.string().optional(),
   identificador: z.string().optional(),
-  importe: z.number().nonnegative(),
-  moneda: z.enum(["UYU", "USD"]),
+  importe: z.number().int().nonnegative(),
+  moneda: z.enum(["P", "U"]),
   descripcion: z.string().optional(),
 });
 
 export const RowReintegrosSchema = z.object({
   edificio: z.string().optional(),
+  nombreEdificio: z.string().optional(),
   fecha: z.string().optional(),
   observaciones: z.string().max(20).optional(),
   rubro: z.literal(412),
@@ -35,8 +37,8 @@ export const RowReintegrosSchema = z.object({
   conceptoCtaParticular: z.string().optional(),
   clase: z.string().optional(),
   empresa: z.string().optional(),
-  importe: z.number().nonnegative(),
-  moneda: z.enum(["UYU", "USD"]),
+  importe: z.number().int().nonnegative(),
+  moneda: z.enum(["P", "U"]),
   descripcion: z.string().optional(),
 });
 

@@ -4,10 +4,14 @@ import { calcularEdificio } from "./edificio";
 const RUBRO_GASTOS = 113;
 const SUBRUBRO_GASTOS = 1;
 
+function convertirMoneda(moneda: string): "P" | "U" {
+  return moneda === "USD" ? "U" : "P";
+}
+
 export function mapToGastosRows(registro: RegistroBase): RowGastos[] {
   const edificio = calcularEdificio(registro.header);
-
   const fecha = registro.header.fecha;
+  const moneda = convertirMoneda(registro.header.moneda);
 
   if (registro.items.length === 0) {
     return [
@@ -21,9 +25,9 @@ export function mapToGastosRows(registro: RegistroBase): RowGastos[] {
         codigo: "E",
         unidad: registro.header.unidad,
         identificador: registro.header.identificador,
-        importe: registro.totales.importeTotal,
-        moneda: registro.totales.moneda,
-        descripcion: registro.header.observacionesOS,
+        importe: Math.round(registro.totales.importeTotal),
+        moneda,
+        descripcion: registro.header.observacionesOS?.toUpperCase(),
       },
     ];
   }
@@ -38,8 +42,8 @@ export function mapToGastosRows(registro: RegistroBase): RowGastos[] {
     codigo: "E" as const,
     unidad: registro.header.unidad,
     identificador: registro.header.identificador,
-    importe: item.importe,
-    moneda: registro.header.moneda,
-    descripcion: `${item.cantidad} ${item.descripcion}`,
+    importe: Math.round(item.importe),
+    moneda,
+    descripcion: `${item.cantidad} ${item.descripcion}`.toUpperCase(),
   }));
 }

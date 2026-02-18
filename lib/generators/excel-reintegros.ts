@@ -3,6 +3,7 @@ import type { RowReintegros } from "@/lib/schemas";
 
 const COLUMNS = [
   { header: "N° de edificio/empresa\n(caja/movimiento)", key: "edificio", width: 22 },
+  { header: "Nombre del Edificio", key: "nombreEdificio", width: 22 },
   { header: "Fecha", key: "fecha", width: 12 },
   { header: "Unidad", key: "unidad", width: 10 },
   { header: "Identificador", key: "identificador", width: 14 },
@@ -54,6 +55,7 @@ export async function generarExcelReintegros(rows: RowReintegros[]): Promise<Buf
     // En reintegros: unidad e identificador van vacíos
     const excelRow = sheet.addRow({
       edificio: row.edificio ?? "",
+      nombreEdificio: row.nombreEdificio ?? "",
       fecha: row.fecha ?? "",
       unidad: "",
       identificador: "",

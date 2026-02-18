@@ -3,6 +3,7 @@ import type { RowGastos } from "@/lib/schemas";
 
 const COLUMNS = [
   { header: "N° de edificio/empresa\n(caja/movimiento)", key: "edificio", width: 22 },
+  { header: "Nombre del Edificio", key: "nombreEdificio", width: 22 },
   { header: "Fecha", key: "fecha", width: 12 },
   { header: "Unidad", key: "unidad", width: 10 },
   { header: "Identificador", key: "identificador", width: 14 },
@@ -54,6 +55,7 @@ export async function generarExcelGastos(rows: RowGastos[]): Promise<Buffer> {
   for (const row of rows) {
     const excelRow = sheet.addRow({
       edificio: row.edificio ?? "",
+      nombreEdificio: row.nombreEdificio ?? "",
       fecha: row.fecha ?? "",
       unidad: row.unidad ?? "",
       identificador: row.identificador ?? "",

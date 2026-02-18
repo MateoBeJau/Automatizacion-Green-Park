@@ -4,6 +4,10 @@ import { calcularEdificio } from "./edificio";
 
 const RUBRO_REINTEGROS = 412;
 
+function convertirMoneda(moneda: string): "P" | "U" {
+  return moneda === "USD" ? "U" : "P";
+}
+
 export function mapToReintegrosRows(
   registro: RegistroBase,
   catalogo: CatalogoMap
@@ -11,6 +15,7 @@ export function mapToReintegrosRows(
   const unidadCompleta = `${registro.header.identificador}${registro.header.unidad}`;
   const edificio = calcularEdificio(registro.header);
   const fecha = registro.header.fecha;
+  const moneda = convertirMoneda(registro.header.moneda);
 
   if (registro.items.length === 0) {
     return [
@@ -22,9 +27,9 @@ export function mapToReintegrosRows(
         tipo: "C",
         comprobante: registro.header.numeroOS.padStart(8, "0"),
         codigo: "E",
-        importe: registro.totales.importeTotal,
-        moneda: registro.totales.moneda,
-        descripcion: `${registro.header.observacionesOS ?? ""} ${unidadCompleta}`.trim(),
+        importe: Math.round(registro.totales.importeTotal),
+        moneda,
+        descripcion: `${registro.header.observacionesOS ?? ""} ${unidadCompleta}`.trim().toUpperCase(),
       },
     ];
   }
@@ -40,9 +45,9 @@ export function mapToReintegrosRows(
       tipo: "C",
       comprobante: registro.header.numeroOS.padStart(8, "0"),
       codigo: "E" as const,
-      importe: item.importe,
-      moneda: registro.header.moneda,
-      descripcion: `${item.cantidad} ${item.descripcion} ${unidadCompleta}`,
+      importe: Math.round(item.importe),
+      moneda,
+      descripcion: `${item.cantidad} ${item.descripcion} ${unidadCompleta}`.toUpperCase(),
     };
   });
 }
