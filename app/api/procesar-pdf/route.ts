@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
 
     const registroBase = await parsePDF(buffer);
 
-    const rowsGastos = mapToGastosRows(registroBase, catalogo);
+    const rowsGastos = mapToGastosRows(registroBase);
     const rowsReintegros = mapToReintegrosRows(registroBase, catalogo);
 
     const metadata = {

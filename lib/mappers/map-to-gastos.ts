@@ -1,13 +1,10 @@
 import type { RegistroBase, RowGastos } from "@/lib/schemas";
-import { type CatalogoMap, buscarSubrubro } from "@/lib/catalogo/articulos";
 import { calcularEdificio } from "./edificio";
 
 const RUBRO_GASTOS = 113;
+const SUBRUBRO_GASTOS = 1;
 
-export function mapToGastosRows(
-  registro: RegistroBase,
-  catalogo: CatalogoMap
-): RowGastos[] {
+export function mapToGastosRows(registro: RegistroBase): RowGastos[] {
   const edificio = calcularEdificio(registro.header);
 
   if (registro.items.length === 0) {
@@ -15,7 +12,7 @@ export function mapToGastosRows(
       {
         edificio,
         rubro: RUBRO_GASTOS,
-        subrubro: 22,
+        subrubro: SUBRUBRO_GASTOS,
         tipo: "C",
         comprobante: registro.header.numeroOS.padStart(8, "0"),
         codigo: "E",
@@ -28,21 +25,17 @@ export function mapToGastosRows(
     ];
   }
 
-  return registro.items.map((item) => {
-    const subrubro = buscarSubrubro(item.descripcion, catalogo);
-
-    return {
-      edificio,
-      rubro: RUBRO_GASTOS,
-      subrubro,
-      tipo: "C",
-      comprobante: registro.header.numeroOS.padStart(8, "0"),
-      codigo: "E" as const,
-      unidad: registro.header.unidad,
-      identificador: registro.header.identificador,
-      importe: item.importe,
-      moneda: registro.header.moneda,
-      descripcion: `${item.cantidad} ${item.descripcion}`,
-    };
-  });
+  return registro.items.map((item) => ({
+    edificio,
+    rubro: RUBRO_GASTOS,
+    subrubro: SUBRUBRO_GASTOS,
+    tipo: "C",
+    comprobante: registro.header.numeroOS.padStart(8, "0"),
+    codigo: "E" as const,
+    unidad: registro.header.unidad,
+    identificador: registro.header.identificador,
+    importe: item.importe,
+    moneda: registro.header.moneda,
+    descripcion: `${item.cantidad} ${item.descripcion}`,
+  }));
 }
