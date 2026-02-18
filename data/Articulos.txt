@@ -1,0 +1,297 @@
+ombre	
+ARTEFACTO REDONDO 5W	21
+ARTEFACTO TUBO LARGO (120cm)	21
+Control universal tv	22
+CONTROL PUNTA CABLE	22
+Control universal AA	22
+Enchufe 3 en linea hembra	22
+Enchufe 3 en linea macho	22
+DIFERENCIAL 4P 63A	22
+Lampara led DICROICA bipin 220	21
+Lampara led gu10	21
+Lampara led r7s (halogena 100w)	21
+LAMPARA LED E14	21
+Lampara led gota e27	21
+Modulo 3 en linea blanco	22
+MODULO Interruptor bipolar blanco	22
+MODULO 3 PATAS CHATAS	22
+PLAQUETA  1 MODULO (no va)	22
+Porta lampara e27	22
+Sensor movimiento t3100 Interior	22
+TELEFONO	24
+TELEFONO IP	24
+TIMER DIGITAL	22
+TRANSFORMADOR PUNTA CABLE	22
+TUBO LUZ CORTO	21
+BISAGRA TAPA INODORO	22
+Canilla lavaropa	22
+KIT CIERRE CERAMICO	22
+Colilla M-H	22
+Monocomando cocina	22
+Sifon cromado baño	22
+TAPA INODORO	22
+VALVULA DE DESCARGA COMPLETA	22
+Valvula baño	22
+Valvula cocina	22
+PILAS AA 	22
+BATERIA 9V 	22
+PILAS AAA 	22
+ROUTER	24
+CABLE HDMI	22
+GANCHO CORTINA METAL	22
+GANCHO CORTINA PLASTICO	22
+MALLA MOSQUITERO	22
+Piston neumatico 150N	22
+TAPÓN BAÑERA	22
+Acople para manguera	22
+Adaptador Americano	22
+Adaptador shucko	22
+Aretefacto cuadrado 10w	21
+Arrancadores	22
+Artefacto doble bidireccional	22
+ARTEFACTO EMBUTIR 5CM 3W	21
+Artefacto embutir entrada Torres	22
+Artefacto Garden modelo 7393	22
+Artefacto redondo 10w	21
+Artefacto redondo 15w	21
+Artefacto redondo 20w	21
+Artefacto simple bidireccional	21
+Artefacto t5 120cm	21
+Artefacto t5 30cm	21
+Artefacto t5 60cm	21
+Artefacto t5 90cm	21
+Artefacto tortuga	21
+BISAGRAS PARA PUERTA	22
+BOCHA PARA GRIFO	22
+Boton cisterna	22
+BOTON DE CISTERNA CUADRADO FERRUM	22
+BOTON DE CISTERNA REDONDO FERRUM	22
+BOYA CISTERNA FERRUM	22
+Brazo cierrapuerta	22
+CAJA 1 MODULO	22
+Caja 3 modulos	22
+Caja estanco exterior	22
+Caja modulo telefono	22
+Calefon	25
+Calefones	25
+CANILLA 1/2	22
+CANILLA 3/4	22
+Canillas	22
+CAPACITOR	22
+Cebo cucarcha	22
+Cepillo alambre	22
+Chicharra timbre	22
+Cinta adhesiva	22
+Cinta aisladora	22
+Cinta ancha empapelar	22
+CINTA ANTI DERRAPE	22
+CINTA DE ENMASCARAR	22
+Cinta doblefaz	22
+Cinta empaque	22
+Cinta etiquetadora	22
+Cinta fina empapelar	22
+Cinta vulcanizante	22
+CLAVO	22
+COILLA 3/4 M-H	22
+Colilla 3/4	22
+Colilla bidet	22
+COLILLA DE BIDET CON ROSETA	22
+Colilla H-H	22
+Colilla monocomando	22
+CONTACTOR 2P 25A	22
+CONTACTOR 4P 24A	22
+CONTACTOR 4P 40A	22
+Cuello flexible inodoro	22
+DESTAPA CAÑERIA	22
+Duchero	22
+ELECTRODO	22
+Embellecedor bacha baño	22
+Enchufe shucko hembra	22
+Enchufe shucko macho	22
+Extractor 100	25
+Extractor 200	25
+EXTRACTOR KITA	25
+GOMA CUELLO DE INODORO FERRUM	22
+Grifo 1/2	22
+GRIFO 3/4	22
+Hoja trincheta	22
+Insecticida	22
+Interruptor bipolar negro	22
+Interruptor combinacion negro	22
+Interruptor portatil	22
+Jabonera	22
+Jabonera clubes	22
+Jimo penetrante	22
+Junta apoyo mochila inodoro	22
+Kit cisterna 2en1 montalbo	22
+KIT DE CISTERNA COMPLETO	22
+Kit descarga montalbo	22
+La gotita	22
+LAMPARA DICROICA BIPIN 12V	21
+LAMPARA HALOGENA BIPIN	21
+LAMPARA HALOGENA E14 TIPO VELA	21
+LAMPARA HALOGENA E27 TIPO VELA	21
+Lampara led ar111	21
+LAMPARA LED BIPIN 12V	21
+LAMPARA LED E27 TIPO VELA	21
+Lampara led g4 bipin	21
+Lampara led g9	21
+Lampara led r7s 118mm (halogena 500w)	21
+Lluvero bidet	22
+LLUVERO TELEFONO	22
+Luz emergencia	21
+LUZ SOLAR	21
+MANGUERA DESAGÜE LAVARROPA	22
+MANGUERA PARA LAVARROPA	22
+Modulo 3 en linea negro	22
+Modulo ciego blanco	22
+Modulo ciego negro	22
+MODULO INTERRUPTOR BIPOALR BEIGE	22
+MODULO Interruptor combinacion blanco	22
+MODULO Interruptor unipolar blanco	22
+MODULO Interruptor unipolar negro	22
+Modulo rj45	22
+Modulo shucko blanco	22
+Modulo shucko negro	22
+Modulo telefono	22
+Modulo timbre	22
+MODULO UNIVERSAL 3 EN LINEA BLANCO	22
+Modulo universal 3 en linea negro	22
+Monocomando baño pico alto	22
+Monocomando bidet Milano	22
+Monocomando bidet Rimontti	22
+MONOCOMANDO PARA BACHA RIMONTTI	22
+Picaporte	22
+Pila LongLife	22
+Piston neumatico 30n	22
+Piston neumatico 80n	22
+PLAFON REDONDO 30CM	22
+Plaqueta 1 modulo blanca	22
+Plaqueta 1 modulo negra	22
+Plaqueta 2 modulos blanca	22
+Plaqueta 2 modulos negra	22
+Plaqueta 3 modulos blanca	22
+Plaqueta 3 modulos negra	22
+PLAQUETA CIEGA	22
+PLAQUETA CIEGA REDONDA	22
+Plaqueta estanco con tapa	22
+Porta lampara ceramico e27	22
+Porta lampara e14	22
+Porta rollo	22
+PORTACANDADO	22
+Precinto (bolsa)	22
+Reflector led 10w	21
+Reflector led 30w	21
+Regleta	21
+REJILLA CROMADA 10X10	22
+REJILLA CROMADA 15X15	22
+REJILLA DE FONDO CHICA	22
+REJILLA DE FONDO GRANDE	22
+REJILLA PVC 10X10	22
+REPISA DE BAÑO	22
+Secador de pelo	22
+SENSOR DE HUMO	22
+Sensor de movimiento t3100 Intenperie	22
+Sifon cromado plastico baño	22
+Sifon doble cromado plastico	22
+Sifon simple plastico	22
+SIFON UNIVERSAL	22
+SPOT FIJO PARA BARRA	21
+Tapa ciega cuadrada	22
+Tapa ciega redonda	22
+Tapa desague 10x10 bronce	22
+Tapa desague 10x10 plastica	22
+Tapa inodoro plastica	22
+Tapon bacha bañ c/rosca	22
+TERMICA 1P +N 10A	22
+TERMICA 1P +N 16A	22
+TERMICA 1P +N 20A	22
+TERMICA 1P +N 25A	22
+TERMICA 1P +N 32A	22
+TERMICA 1P +N 40A	22
+TERMICA 1P 10A	22
+TERMICA 1P 16A	22
+TERMICA 1P 20A	22
+TERMICA 1P 32A	22
+TERMICA 1P 40A	22
+TERMICA 1P 63A	22
+TERMICA 2P 16A	22
+TERMICA 2P 20A	22
+TERMICA 2P 32A	22
+TERMICA 3P 20A	22
+TERMICA 3P 32A	22
+TERMICA 4P 15A	22
+TERMICA 4P 32A	22
+TERMICA 4P 40A	22
+TERMICA 4P 40A SUPER INMUNIZADA	22
+TERMICA 4P 63A	22
+TERMICA 4P 80A	22
+TIMER ANALOGICO	22
+Tope para puerta	22
+Tope para puerta c/iman	22
+Tornillo anclaje water	22
+Tornillo union water mochila	22
+TORNILLO WATER MOCHILA FERRUM	22
+Tortuga led parpado	21
+Transformador 12 v	22
+TUBO DE LUZ CORTO FINO	21
+Valvula bidet	22
+Valvula calefon	22
+VALVULA DE CARGA FERRUM	22
+VALVULA DE DESCARGA FERRUM	22
+VALVULA DE DESCARGA TIPO PERA	22
+VALVULA TIC TOC	22
+VOLANTE CRUZ	22
+Zocalo bipin	22
+Zocalo gu10	22
+LAMPARA PAR 30 	21
+PILA A27	22
+AIRE 12000 BTU ON/OFF	25
+CAJA 2 MODULOS	22
+CAJA 4 MODULOS	22
+CALEFON HORIZONTAL 80 LTS	25
+TABLERO DE EMBUTIR	22
+DIFERENCIA 4P 32A	22
+AIRE 18000 BTU EVEREST ON/OFF	25
+DIFERENCIA 4P 40 A	22
+AIRE 9000 BTU ON/OFF	25
+AIRE 18000 BTU ON/OFF GREENWIND	25
+AIRE 18000 BTU JAMES ON/OFF	25
+ARTEFACTO BIDIRECCINAL GRIS 	22
+BARRA MANIJON INOX	22
+CIERRE CERAMICO	22
+AIRE 18000 BTU BRILLANT ON/OFF	25
+PLAFON LED CUADRADO 20W	21
+ORRIN	22
+CAÑO CORRUGADO	22
+AIRE 18000 BTU PUNKAL ON/OFF	25
+PESTILLO PUERTA ECO BLANCO	22
+Diferencial  2P de 40A	22
+CAJA EXTERIRO 42 X 32 X 20	22
+BRAZO CIERRAPUERTA BRANO N°3	22
+PLAQUETA GRIS 3 MODULOS	22
+CAMARA CUBO 20X20	22
+TAPA CAMARA C/MARCO 40X40	22
+PORCELANTO BEIGE 60 X 60	22
+CODO 63X90 PN16	22
+CAÑO TUBO PEAD 2"	22
+AIRE INVERTER 12000 BTU AIRWAY	25
+AIRE 18000 BTU AIRWAY ON/OFF	25
+CALEFON JAMES 80 LTS	25
+AIRE 21000 BTU BRILLIANT	25
+SPOT FIJO CUADRADO	22
+VALVULA CALEFON 3/4	22
+TRIFASICO	22
+Tablero exterior 8 modulos	22
+Aire 18000 btu inverter 	25
+TRANSFORMADOR TEL IP	22
+DIFERENCIAL 4P 40A SUPER INMUNIZADO	22
+Tablero embutir 36mod	22
+Adaptador HDMI a VGA	22
+PITON CERRADO	22
+PALANGANA FERRUM	22
+Sifon pvc p/m cro JIM	22
+INODORO COMPLETO	22
+TERMICA 3P 25 A	22
+CABLE BAJO GOMA 3X2	22
+EXTRACTOR 500	22
