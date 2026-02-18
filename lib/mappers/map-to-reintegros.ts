@@ -10,11 +10,13 @@ export function mapToReintegrosRows(
 ): RowReintegros[] {
   const unidadCompleta = `${registro.header.identificador}${registro.header.unidad}`;
   const edificio = calcularEdificio(registro.header);
+  const fecha = registro.header.fecha;
 
   if (registro.items.length === 0) {
     return [
       {
         edificio,
+        fecha,
         rubro: RUBRO_REINTEGROS,
         subrubro: 22,
         tipo: "C",
@@ -32,6 +34,7 @@ export function mapToReintegrosRows(
 
     return {
       edificio,
+      fecha,
       rubro: RUBRO_REINTEGROS as 412,
       subrubro,
       tipo: "C",

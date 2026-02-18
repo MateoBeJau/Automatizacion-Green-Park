@@ -2,80 +2,78 @@
 
 import { useState, useCallback, useRef } from "react";
 
-interface ItemPDF {
-  id: string;
-  descripcion: string;
-  cantidad: number;
-  precio: number;
-  importe: number;
-}
-
-interface Metadata {
-  items: number;
+interface PDFSummary {
   os: string;
-  complejo: string;
-  identificador: string;
-  unidad: string;
   cliente: string;
+  complejo: string;
+  edificio: string;
+  unidad: string;
+  identificador: string;
   fecha: string;
+  items: number;
   total: number;
   moneda: string;
-  edificio: string;
 }
 
 interface ProcessResult {
   success: boolean;
   files: { gastos: string; reintegros: string };
-  metadata: Metadata;
-  registro: { items: ItemPDF[] };
+  summaries: PDFSummary[];
+  totalRows: number;
   error?: string;
-  _debug?: string;
 }
 
 export default function Home() {
-  const [file, setFile] = useState<File | null>(null);
+  const [files, setFiles] = useState<File[]>([]);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<ProcessResult | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [dragActive, setDragActive] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  const addFiles = (incoming: FileList | File[]) => {
+    const pdfs = Array.from(incoming).filter((f) => f.type === "application/pdf" || f.name.endsWith(".pdf"));
+    if (pdfs.length === 0) {
+      setError("Solo se aceptan archivos PDF");
+      return;
+    }
+    setError(null);
+    setResult(null);
+    setFiles((prev) => {
+      const existing = new Set(prev.map((f) => f.name));
+      const nuevos = pdfs.filter((f) => !existing.has(f.name));
+      return [...prev, ...nuevos];
+    });
+  };
+
+  const removeFile = (index: number) => {
+    setFiles((prev) => prev.filter((_, i) => i !== index));
+    setResult(null);
+  };
+
   const handleDrag = useCallback((e: React.DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (e.type === "dragenter" || e.type === "dragover") {
-      setDragActive(true);
-    } else if (e.type === "dragleave") {
-      setDragActive(false);
-    }
+    if (e.type === "dragenter" || e.type === "dragover") setDragActive(true);
+    else if (e.type === "dragleave") setDragActive(false);
   }, []);
 
   const handleDrop = useCallback((e: React.DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
     setDragActive(false);
-    const droppedFile = e.dataTransfer.files?.[0];
-    if (droppedFile?.type === "application/pdf") {
-      setFile(droppedFile);
-      setResult(null);
-      setError(null);
-    } else {
-      setError("Solo se aceptan archivos PDF");
-    }
+    addFiles(e.dataTransfer.files);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selected = e.target.files?.[0];
-    if (selected) {
-      setFile(selected);
-      setResult(null);
-      setError(null);
-    }
+    if (e.target.files) addFiles(e.target.files);
+    e.target.value = "";
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!file) return;
+    if (files.length === 0) return;
 
     setLoading(true);
     setError(null);
@@ -83,7 +81,7 @@ export default function Home() {
 
     try {
       const formData = new FormData();
-      formData.append("pdf", file);
+      for (const f of files) formData.append("pdfs", f);
 
       const res = await fetch("/api/procesar-pdf", {
         method: "POST",
@@ -93,7 +91,7 @@ export default function Home() {
       const data = await res.json();
 
       if (!res.ok) {
-        setError(data.error || "Error al procesar el PDF");
+        setError(data.error || "Error al procesar los PDFs");
         return;
       }
 
@@ -115,7 +113,7 @@ export default function Home() {
   };
 
   const reset = () => {
-    setFile(null);
+    setFiles([]);
     setResult(null);
     setError(null);
   };
@@ -128,19 +126,21 @@ export default function Home() {
             Green Park — Automatización
           </h1>
           <p className="text-slate-500">
-            Subí un PDF de orden de servicio y generá los Excel de Gastos y
-            Reintegros
+            Subí uno o más PDFs de órdenes de servicio y generá los Excel de Gastos y Reintegros
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <input
             ref={fileInputRef}
             type="file"
             accept=".pdf"
+            multiple
             onChange={handleFileChange}
             className="hidden"
           />
+
+          {/* Zona de drop */}
           <div
             onClick={() => fileInputRef.current?.click()}
             onDragEnter={handleDrag}
@@ -148,49 +148,60 @@ export default function Home() {
             onDragOver={handleDrag}
             onDrop={handleDrop}
             className={`
-              border-2 border-dashed rounded-xl p-10 text-center
+              border-2 border-dashed rounded-xl p-8 text-center
               transition-all duration-200 cursor-pointer
-              ${
-                dragActive
-                  ? "border-blue-500 bg-blue-50"
-                  : file
-                    ? "border-green-400 bg-green-50"
-                    : "border-slate-300 bg-white hover:border-slate-400 hover:bg-slate-50"
+              ${dragActive
+                ? "border-blue-500 bg-blue-50"
+                : "border-slate-300 bg-white hover:border-slate-400 hover:bg-slate-50"
               }
             `}
           >
-            {file ? (
-              <div>
-                <div className="text-4xl mb-3">📄</div>
-                <p className="text-lg font-medium text-green-700">{file.name}</p>
-                <p className="text-sm text-slate-500 mt-1">
-                  {(file.size / 1024).toFixed(1)} KB — Listo para procesar
-                </p>
-              </div>
-            ) : (
-              <div>
-                <div className="text-4xl mb-3">📁</div>
-                <p className="text-lg font-medium text-slate-600">
-                  Arrastrá o hacé click para subir un PDF
-                </p>
-                <p className="text-sm text-slate-400 mt-1">
-                  Formato: Orden de Servicio (.pdf)
-                </p>
-              </div>
-            )}
+            <div className="text-3xl mb-2">📁</div>
+            <p className="font-medium text-slate-600">
+              Arrastrá o hacé click para agregar PDFs
+            </p>
+            <p className="text-sm text-slate-400 mt-1">
+              Podés seleccionar múltiples archivos a la vez
+            </p>
           </div>
+
+          {/* Lista de archivos seleccionados */}
+          {files.length > 0 && (
+            <div className="bg-white border border-slate-200 rounded-xl divide-y divide-slate-100">
+              {files.map((f, i) => (
+                <div key={i} className="flex items-center justify-between px-4 py-2.5 text-sm">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <span className="text-base">📄</span>
+                    <span className="text-slate-700 truncate">{f.name}</span>
+                    <span className="text-slate-400 shrink-0">
+                      {(f.size / 1024).toFixed(1)} KB
+                    </span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => removeFile(i)}
+                    className="ml-3 text-slate-400 hover:text-red-500 transition-colors text-lg leading-none shrink-0"
+                  >
+                    ×
+                  </button>
+                </div>
+              ))}
+              <div className="px-4 py-2 bg-slate-50 rounded-b-xl text-xs text-slate-500">
+                {files.length} archivo{files.length !== 1 ? "s" : ""} seleccionado{files.length !== 1 ? "s" : ""}
+              </div>
+            </div>
+          )}
 
           <div className="flex gap-3">
             <button
               type="submit"
-              disabled={!file || loading}
+              disabled={files.length === 0 || loading}
               className={`
                 flex-1 py-3 px-6 rounded-lg font-semibold text-white
                 transition-all duration-200
-                ${
-                  !file || loading
-                    ? "bg-slate-300 cursor-not-allowed"
-                    : "bg-blue-600 hover:bg-blue-700 active:bg-blue-800 shadow-md hover:shadow-lg"
+                ${files.length === 0 || loading
+                  ? "bg-slate-300 cursor-not-allowed"
+                  : "bg-blue-600 hover:bg-blue-700 active:bg-blue-800 shadow-md hover:shadow-lg"
                 }
               `}
             >
@@ -200,14 +211,14 @@ export default function Home() {
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
                   </svg>
-                  Procesando...
+                  Procesando {files.length} PDF{files.length !== 1 ? "s" : ""}...
                 </span>
               ) : (
-                "Procesar PDF"
+                `Procesar ${files.length > 0 ? files.length : ""} PDF${files.length !== 1 ? "s" : ""}`
               )}
             </button>
 
-            {(file || result) && (
+            {(files.length > 0 || result) && (
               <button
                 type="button"
                 onClick={reset}
@@ -228,95 +239,46 @@ export default function Home() {
 
         {result?.success && (
           <div className="mt-8 space-y-6">
-            <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
-              <h2 className="text-lg font-semibold text-slate-800 mb-4">
-                Datos extraídos del PDF
-              </h2>
-              <div className="grid grid-cols-3 gap-4 text-sm">
-                <div>
-                  <span className="text-slate-500">O.S.</span>
-                  <p className="font-medium text-slate-800">{result.metadata.os || "—"}</p>
-                </div>
-                <div>
-                  <span className="text-slate-500">Identificador</span>
-                  <p className="font-medium text-slate-800">{result.metadata.identificador || "—"}</p>
-                </div>
-                <div>
-                  <span className="text-slate-500">Unidad</span>
-                  <p className="font-medium text-slate-800">{result.metadata.unidad || "—"}</p>
-                </div>
-                <div>
-                  <span className="text-slate-500">Fecha</span>
-                  <p className="font-medium text-slate-800">{result.metadata.fecha || "—"}</p>
-                </div>
-                <div>
-                  <span className="text-slate-500">Cliente</span>
-                  <p className="font-medium text-slate-800">{result.metadata.cliente || "—"}</p>
-                </div>
-                <div>
-                  <span className="text-slate-500">Complejo</span>
-                  <p className="font-medium text-slate-800">{result.metadata.complejo || "—"}</p>
-                </div>
-                <div>
-                  <span className="text-slate-500">N° Edificio</span>
-                  <p className="font-medium text-slate-800">{result.metadata.edificio || "—"}</p>
-                </div>
-                <div>
-                  <span className="text-slate-500">Total</span>
-                  <p className="font-medium text-slate-800">
-                    {result.metadata.moneda}{" "}
-                    {result.metadata.total.toLocaleString("es-UY", { minimumFractionDigits: 2 })}
-                  </p>
-                </div>
+            {/* Resumen de PDFs procesados */}
+            <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+              <div className="px-6 py-4 border-b border-slate-100">
+                <h2 className="text-lg font-semibold text-slate-800">
+                  {result.summaries.length} PDF{result.summaries.length !== 1 ? "s" : ""} procesado{result.summaries.length !== 1 ? "s" : ""}
+                  <span className="ml-2 text-sm font-normal text-slate-500">
+                    — {result.totalRows} fila{result.totalRows !== 1 ? "s" : ""} en total
+                  </span>
+                </h2>
               </div>
-
-              {result.registro?.items?.length > 0 && (
-                <div className="mt-5">
-                  <h3 className="text-sm font-semibold text-slate-600 mb-2">
-                    Artículos ({result.registro.items.length})
-                  </h3>
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-xs border border-slate-200">
-                      <thead>
-                        <tr className="bg-slate-50 text-slate-600">
-                          <th className="px-2 py-1.5 text-left border-b">ID</th>
-                          <th className="px-2 py-1.5 text-left border-b">Descripción</th>
-                          <th className="px-2 py-1.5 text-right border-b">Cant.</th>
-                          <th className="px-2 py-1.5 text-right border-b">Precio</th>
-                          <th className="px-2 py-1.5 text-right border-b">Importe</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {result.registro.items.map((item, idx) => (
-                          <tr key={idx} className="border-t border-slate-100">
-                            <td className="px-2 py-1.5 font-mono">{item.id}</td>
-                            <td className="px-2 py-1.5">{item.descripcion}</td>
-                            <td className="px-2 py-1.5 text-right">{item.cantidad}</td>
-                            <td className="px-2 py-1.5 text-right">{item.precio.toFixed(2)}</td>
-                            <td className="px-2 py-1.5 text-right font-medium">{item.importe.toFixed(2)}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
+              <div className="divide-y divide-slate-100">
+                {result.summaries.map((s, i) => (
+                  <div key={i} className="px-6 py-3 text-sm grid grid-cols-4 gap-2">
+                    <div>
+                      <span className="text-slate-400 text-xs block">O.S.</span>
+                      <span className="font-mono font-medium text-slate-800">{s.os}</span>
+                    </div>
+                    <div>
+                      <span className="text-slate-400 text-xs block">Cliente</span>
+                      <span className="text-slate-700 truncate block">{s.cliente}</span>
+                    </div>
+                    <div>
+                      <span className="text-slate-400 text-xs block">Unidad</span>
+                      <span className="text-slate-700">{s.identificador}{s.unidad} · Ed.{s.edificio}</span>
+                    </div>
+                    <div className="text-right">
+                      <span className="text-slate-400 text-xs block">Total</span>
+                      <span className="font-medium text-slate-800">
+                        {s.moneda} {s.total.toLocaleString("es-UY", { minimumFractionDigits: 2 })}
+                      </span>
+                    </div>
                   </div>
-                </div>
-              )}
+                ))}
+              </div>
             </div>
 
-            {result._debug && (
-              <details className="bg-slate-800 rounded-xl p-4 text-xs">
-                <summary className="text-slate-300 cursor-pointer font-medium">
-                  Texto raw del PDF (debug)
-                </summary>
-                <pre className="mt-3 text-green-400 whitespace-pre-wrap max-h-96 overflow-y-auto">
-                  {result._debug}
-                </pre>
-              </details>
-            )}
-
+            {/* Botones de descarga */}
             <div className="grid grid-cols-2 gap-4">
               <button
-                onClick={() => downloadBase64(`Gastos_OS${result.metadata.os}.xlsx`, result.files.gastos)}
+                onClick={() => downloadBase64("Gastos.xlsx", result.files.gastos)}
                 className="p-5 bg-blue-50 border border-blue-200 rounded-xl hover:bg-blue-100 transition-all group"
               >
                 <div className="text-2xl mb-2">📊</div>
@@ -325,7 +287,7 @@ export default function Home() {
               </button>
 
               <button
-                onClick={() => downloadBase64(`Reintegros_OS${result.metadata.os}.xlsx`, result.files.reintegros)}
+                onClick={() => downloadBase64("Reintegros.xlsx", result.files.reintegros)}
                 className="p-5 bg-green-50 border border-green-200 rounded-xl hover:bg-green-100 transition-all group"
               >
                 <div className="text-2xl mb-2">📋</div>

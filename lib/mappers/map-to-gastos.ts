@@ -7,10 +7,13 @@ const SUBRUBRO_GASTOS = 1;
 export function mapToGastosRows(registro: RegistroBase): RowGastos[] {
   const edificio = calcularEdificio(registro.header);
 
+  const fecha = registro.header.fecha;
+
   if (registro.items.length === 0) {
     return [
       {
         edificio,
+        fecha,
         rubro: RUBRO_GASTOS,
         subrubro: SUBRUBRO_GASTOS,
         tipo: "C",
@@ -27,6 +30,7 @@ export function mapToGastosRows(registro: RegistroBase): RowGastos[] {
 
   return registro.items.map((item) => ({
     edificio,
+    fecha,
     rubro: RUBRO_GASTOS,
     subrubro: SUBRUBRO_GASTOS,
     tipo: "C",

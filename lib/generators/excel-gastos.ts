@@ -26,10 +26,7 @@ const COLUMNS = [
   { header: "Empresa", key: "empresa", width: 10 },
 ];
 
-export async function generarExcelGastos(
-  rows: RowGastos[],
-  metadata?: { complejo?: string; fecha?: string }
-): Promise<Buffer> {
+export async function generarExcelGastos(rows: RowGastos[]): Promise<Buffer> {
   const workbook = new ExcelJS.Workbook();
   const sheet = workbook.addWorksheet("Gastos");
 
@@ -57,7 +54,7 @@ export async function generarExcelGastos(
   for (const row of rows) {
     const excelRow = sheet.addRow({
       edificio: row.edificio ?? "",
-      fecha: metadata?.fecha ?? "",
+      fecha: row.fecha ?? "",
       unidad: row.unidad ?? "",
       identificador: row.identificador ?? "",
       importe: row.importe,

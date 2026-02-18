@@ -2,6 +2,7 @@ import { z } from "zod";
 
 export const RowGastosSchema = z.object({
   edificio: z.string().optional(),
+  fecha: z.string().optional(),
   observaciones: z.string().max(20).optional(),
   rubro: z.number().int().positive(),
   subrubro: z.number().int().positive(),
@@ -22,6 +23,7 @@ export const RowGastosSchema = z.object({
 
 export const RowReintegrosSchema = z.object({
   edificio: z.string().optional(),
+  fecha: z.string().optional(),
   observaciones: z.string().max(20).optional(),
   rubro: z.literal(412),
   subrubro: z.number().int().positive(),

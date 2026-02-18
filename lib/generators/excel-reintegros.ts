@@ -26,10 +26,7 @@ const COLUMNS = [
   { header: "Empresa", key: "empresa", width: 10 },
 ];
 
-export async function generarExcelReintegros(
-  rows: RowReintegros[],
-  metadata?: { complejo?: string; fecha?: string }
-): Promise<Buffer> {
+export async function generarExcelReintegros(rows: RowReintegros[]): Promise<Buffer> {
   const workbook = new ExcelJS.Workbook();
   const sheet = workbook.addWorksheet("Reintegros");
 
@@ -57,7 +54,7 @@ export async function generarExcelReintegros(
     // En reintegros: unidad e identificador van vacíos
     const excelRow = sheet.addRow({
       edificio: row.edificio ?? "",
-      fecha: metadata?.fecha ?? "",
+      fecha: row.fecha ?? "",
       unidad: "",
       identificador: "",
       importe: row.importe,
